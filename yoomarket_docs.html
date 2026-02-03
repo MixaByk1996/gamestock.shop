@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="utf-8" />
+        <title>
+            Документация API интеграции Yoomarket — REST API для магазинов
+        </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        <!-- SEO -->
+        <meta name="description" content="Официальная документация API интеграции Юмаркет (Yoomarket). Подключите интернет-магазин к Юмаркет и Yoomarket: автоматизируйте обработку заказов, статусов, чатов и уведомлений через REST API." />
+        <meta name="keywords" content="Юмаркет, Yoomarket, Yoomarket API, Юмаркет API, интеграция Yoomarket, интеграция Юмаркет, документация API Yoomarket, REST API для магазинов, API маркетплейса" />
+
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href="https://panel.yoomarket.net/api/docs" />
+
+        <!-- OG -->
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Юмаркет (Yoomarket) Integration API — документация" />
+        <meta property="og:description" content="Полная документация API интеграции Юмаркет и Yoomarket: авторизация, работа с заказами, статусами, чатами и сообщениями. Подключите магазин к Yoomarket через удобный REST API." />
+        <meta property="og:site_name" content="Юмаркет • Yoomarket" />
+
+        <style>
+            html,
+            body {
+                margin: 0;
+                padding: 0;
+                background: #eef1f5;
+                font-family: system-ui, -apple-system, BlinkMacSystemFont,
+                    "SF Pro Text", "Segoe UI", sans-serif;
+                height: 100%;
+            }
+
+            body {
+                display: flex;
+                flex-direction: column;
+            }
+
+            /* TOPBAR */
+            .topbar {
+                background: #151821;
+                color: #f9fafb;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 0 20px;
+                min-height: 56px;
+                box-shadow: 0 1px 3px rgba(15, 23, 42, 0.4);
+            }
+
+            .topbar__title {
+                font-size: 16px;
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 0.04em;
+                opacity: 0.9;
+            }
+
+            /* Buttons block */
+            .topbar__right {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+
+            .topbar__btn {
+                font-size: 13px;
+                padding: 6px 12px;
+                border-radius: 6px;
+                background: rgba(255, 255, 255, 0.08);
+                color: #e5e7eb;
+                text-decoration: none;
+                border: 1px solid rgba(255, 255, 255, 0.15);
+                transition: 0.15s ease;
+                white-space: nowrap;
+            }
+
+            .topbar__btn:hover {
+                background: rgba(255, 255, 255, 0.16);
+                border-color: rgba(255, 255, 255, 0.25);
+            }
+
+            /* MOBILE ADAPTATION */
+            @media (max-width: 640px) {
+                .topbar {
+                    flex-direction: column;
+                    align-items: flex-start;
+                    padding: 12px 16px;
+                    gap: 10px;
+                }
+
+                .topbar__right {
+                    width: 100%;
+                    gap: 8px;
+                }
+
+                .topbar__btn {
+                    flex: 1;
+                    text-align: center;
+                    padding: 8px 10px;
+                    font-size: 12px;
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="topbar">
+            <div class="topbar__title">Yoomarket API</div>
+
+            <div class="topbar__right">
+                <a
+                    href=https://yoomarket.net
+                    class="topbar__btn"
+                    target="_blank"
+                    >Перейти на сайт</a
+                >
+                <a
+                    href=https://panel.yoomarket.net
+                    class="topbar__btn"
+                    target="_blank"
+                    >Создать магазин</a
+                >
+            </div>
+        </div>
+
+        <redoc spec-url="https://panel.yoomarket.net/docs/openapi.yaml"></redoc>
+
+        <script src=https://panel.yoomarket.net/assets/js/redoc.standalone.js></script>
+    </body>
+</html>

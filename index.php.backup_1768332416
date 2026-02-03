@@ -1,0 +1,232 @@
+<?php
+// /www/gamestock.shop/index.php - ГЛАВНАЯ СТРАНИЦА САЙТА (не админка!)
+session_start();
+require_once 'includes/config.php';
+
+// Устанавливаем заголовок страницы
+$page_title = SITE_NAME . ' - Магазин игровых аккаунтов';
+
+// Подключаем общий заголовок (публичный, не админский!)
+require_once 'templates/header.php';
+
+// Статистика для отображения
+try {
+    $pdo = new PDO(
+        "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=utf8mb4",
+        DB_USER,
+        DB_PASS,
+        [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
+    );
+    
+    // Получаем статистику
+    $products_count = $pdo->query("SELECT COUNT(*) as count FROM supplier_products")->fetch()['count'] ?? 0;
+    $suppliers_count = $pdo->query("SELECT COUNT(*) as count FROM suppliers WHERE is_active = 1")->fetch()['count'] ?? 0;
+    $total_stock = $pdo->query("SELECT SUM(stock) as total FROM supplier_products")->fetch()['total'] ?? 0;
+    
+} catch (Exception $e) {
+    $products_count = $suppliers_count = $total_stock = 0;
+}
+?>
+
+<!-- Герой-секция -->
+<div class="hero-section">
+    <div class="container text-center">
+        <h1 class="display-4 mb-4">🎯 Добро пожаловать в <strong>GameStock Shop</strong>!</h1>
+        <p class="lead mb-4">Ведущий магазин игровых аккаунтов, ключей и цифровых товаров</p>
+        <a href="/catalog.php" class="btn btn-light btn-lg px-4">
+            <i class="fas fa-shopping-cart me-2"></i>Перейти в каталог
+        </a>
+        <a href="/cabinet/" class="btn btn-outline-light btn-lg px-4">
+            <i class="fas fa-user me-2"></i>Личный кабинет
+        </a>
+    </div>
+</div>
+
+<!-- Основной контент -->
+<div class="container">
+    <!-- Статус системы -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <div class="alert alert-success">
+                <h4 class="alert-heading"><i class="fas fa-check-circle me-2"></i>Система полностью готова к работе!</h4>
+                <p class="mb-0">Магазин настроен и работает. Доступны все основные функции.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Функционал системы -->
+    <div class="row mb-5">
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body text-center p-4">
+                    <div class="display-4 mb-3 text-primary">🛒</div>
+                    <h4>Автоматический магазин</h4>
+                    <p class="text-muted">Товары автоматически загружаются от поставщиков, цены рассчитываются с наценкой</p>
+                    <a href="/catalog.php" class="btn btn-outline-primary mt-2">
+                        <i class="fas fa-store me-2"></i>Смотреть товары
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body text-center p-4">
+                    <div class="display-4 mb-3 text-success">⚡</div>
+                    <h4>Мгновенная доставка</h4>
+                    <p class="text-muted">Автоматическая выдача товаров сразу после оплаты, 24/7</p>
+                    <span class="badge bg-success mt-2 p-2">
+                        <i class="fas fa-bolt me-1"></i>Активно
+                    </span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body text-center p-4">
+                    <div class="display-4 mb-3 text-info">🔗</div>
+                    <h4>API поставщиков</h4>
+                    <p class="text-muted">Подключен поставщик buy-accs.net с автоматической синхронизацией</p>
+                    <span class="badge bg-info mt-2 p-2">
+                        <i class="fas fa-sync me-1"></i>Автоматическая синхронизация
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Статистика -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <h3 class="mb-4"><i class="fas fa-chart-bar me-2"></i>Статистика магазина</h3>
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <div class="card h-100 border-primary">
+                        <div class="card-body text-center">
+                            <h2 class="text-primary"><?= number_format($products_count) ?></h2>
+                            <h5 class="card-title">Товаров в каталоге</h5>
+                            <p class="text-muted">активных позиций</p>
+                            <a href="/catalog.php" class="btn btn-sm btn-outline-primary">
+                                <i class="fas fa-eye me-1"></i>Посмотреть
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 mb-3">
+                    <div class="card h-100 border-success">
+                        <div class="card-body text-center">
+                            <h2 class="text-success"><?= number_format($suppliers_count) ?></h2>
+                            <h5 class="card-title">Подключенных поставщиков</h5>
+                            <p class="text-muted">работают с API</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 mb-3">
+                    <div class="card h-100 border-warning">
+                        <div class="card-body text-center">
+                            <h2 class="text-warning"><?= number_format($total_stock) ?></h2>
+                            <h5 class="card-title">Общий остаток</h5>
+                            <p class="text-muted">товаров в наличии</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Категории товаров -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <h3 class="mb-4"><i class="fas fa-gamepad me-2"></i>Популярные категории</h3>
+            <div class="d-flex flex-wrap justify-content-center">
+                <span class="category-badge"><i class="fas fa-envelope me-1"></i> Email аккаунты</span>
+                <span class="category-badge"><i class="fas fa-comment-alt me-1"></i> Социальные сети</span>
+                <span class="category-badge"><i class="fas fa-gamepad me-1"></i> Игровые аккаунты</span>
+                <span class="category-badge"><i class="fas fa-key me-1"></i> Ключи активации</span>
+                <span class="category-badge"><i class="fas fa-shield-alt me-1"></i> Прокси и VPN</span>
+                <span class="category-badge"><i class="fas fa-credit-card me-1"></i> Платежные системы</span>
+                <span class="category-badge"><i class="fas fa-bullhorn me-1"></i> Рекламные сервисы</span>
+                <span class="category-badge"><i class="fas fa-robot me-1"></i> Боты и автоматизация</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Как это работает -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <div class="card border-0 shadow">
+                <div class="card-header bg-light">
+                    <h4 class="mb-0"><i class="fas fa-cogs me-2"></i>Как работает система</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row text-center">
+                        <div class="col-md-3 mb-4">
+                            <div class="rounded-circle bg-primary text-white d-inline-flex align-items-center justify-content-center mb-3" style="width: 70px; height: 70px; font-size: 28px;">
+                                <i class="fas fa-truck"></i>
+                            </div>
+                            <h5>Поставщики</h5>
+                            <p class="text-muted">Автоматическая синхронизация товаров через API</p>
+                        </div>
+                        <div class="col-md-3 mb-4">
+                            <div class="rounded-circle bg-success text-white d-inline-flex align-items-center justify-content-center mb-3" style="width: 70px; height: 70px; font-size: 28px;">
+                                <i class="fas fa-percentage"></i>
+                            </div>
+                            <h5>Наценка</h5>
+                            <p class="text-muted">Автоматический расчет цен с наценкой</p>
+                        </div>
+                        <div class="col-md-3 mb-4">
+                            <div class="rounded-circle bg-warning text-white d-inline-flex align-items-center justify-content-center mb-3" style="width: 70px; height: 70px; font-size: 28px;">
+                                <i class="fas fa-shopping-cart"></i>
+                            </div>
+                            <h5>Покупка</h5>
+                            <p class="text-muted">Оплата через Lava и другие платежные системы</p>
+                        </div>
+                        <div class="col-md-3 mb-4">
+                            <div class="rounded-circle bg-info text-white d-inline-flex align-items-center justify-content-center mb-3" style="width: 70px; height: 70px; font-size: 28px;">
+                                <i class="fas fa-rocket"></i>
+                            </div>
+                            <h5>Доставка</h5>
+                            <p class="text-muted">Мгновенная автоматическая выдача товара</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Уведомление для администратора (очень маленькое и не бросающееся в глаза) -->
+    <?php if (isset($_SESSION['admin'])): ?>
+    <div class="row">
+        <div class="col-12">
+            <div class="alert alert-info py-2">
+                <small>
+                    <i class="fas fa-user-shield me-1"></i> 
+                    Вы вошли как администратор. 
+                    <a href="/admin/" class="alert-link">Перейти в админ-панель</a> | 
+                    <a href="/?logout_admin" class="alert-link">Выйти из админ-режима</a>
+                </small>
+            </div>
+        </div>
+    </div>
+    <?php endif; ?>
+
+    <!-- Призыв к действию -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card bg-dark text-white text-center py-5">
+                <h3 class="mb-3">Готовы начать покупки?</h3>
+                <p class="lead mb-4">Выберите товары из нашего каталога и получите их мгновенно!</p>
+                <a href="/catalog.php" class="btn btn-light btn-lg px-5">
+                    <i class="fas fa-shopping-bag me-2"></i>Начать покупки
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php
+// Подключаем общий подвал
+require_once 'templates/footer.php';
