@@ -30,7 +30,7 @@ if (!empty($order['customer_email']) &&
 // ========== КОНЕЦ ИСПРАВЛЕНИЯ ==========
 
 $page_title = 'Ошибка оплаты - ' . SITE_NAME;
-require_once 'templates/header.php';
+require_once 'templates/header-main.php';
 
 // Определяем правильное название поля суммы
 $amount_field = isset($order['total_amount']) ? 'total_amount' : 'amount';

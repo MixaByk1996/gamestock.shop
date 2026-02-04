@@ -35,6 +35,7 @@ require_once 'templates/header.php';
 // Определяем правильное название поля суммы
 $amount_field = isset($order['total_amount']) ? 'total_amount' : 'amount';
 $amount = $order[$amount_field] ?? 0;
+require_once 'templates/header-main.php';
 ?>
 
 <div class="container py-5">
@@ -107,7 +108,7 @@ $amount = $order[$amount_field] ?? 0;
         </div>
     </div>
 </div>
-
+<?php require_once 'templates/footer.php'; ?>
 <?php if (!empty($order['login_data']) && !empty($order['password_data'])): ?>
 <script>
 function copyAccessData() {
@@ -122,4 +123,3 @@ function copyAccessData() {
 </script>
 <?php endif; ?>
 
-<?php require_once 'templates/footer.php'; ?>

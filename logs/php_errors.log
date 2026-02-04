@@ -11083,3 +11083,9 @@ Stack trace:
 [03-Feb-2026 21:55:17 UTC] PHP Warning:  include_once(): Failed opening '../templates/header-main.php' for inclusion (include_path='.;C:\php\pear') in E:\222\gamestock.shop\cabinet\index.php on line 306
 [03-Feb-2026 21:55:53 UTC] PHP Warning:  include_once(../templates/header-main.php): Failed to open stream: No such file or directory in E:\222\gamestock.shop\cabinet\index.php on line 306
 [03-Feb-2026 21:55:53 UTC] PHP Warning:  include_once(): Failed opening '../templates/header-main.php' for inclusion (include_path='.;C:\php\pear') in E:\222\gamestock.shop\cabinet\index.php on line 306
+[04-Feb-2026 19:53:14 UTC] PHP Warning:  include(templates/footer.php): Failed to open stream: No such file or directory in E:\222\gamestock.shop\cabinet\index.php on line 792
+[04-Feb-2026 19:53:14 UTC] PHP Warning:  include(): Failed opening 'templates/footer.php' for inclusion (include_path='.;C:\php\pear') in E:\222\gamestock.shop\cabinet\index.php on line 792
+[04-Feb-2026 20:38:46 UTC] PHP Warning:  include_once(../templates/header-main.php): Failed to open stream: No such file or directory in E:\222\gamestock.shop\catalog.php on line 312
+[04-Feb-2026 20:38:46 UTC] PHP Warning:  include_once(): Failed opening '../templates/header-main.php' for inclusion (include_path='.;C:\php\pear') in E:\222\gamestock.shop\catalog.php on line 312
+[04-Feb-2026 20:38:46 UTC] PHP Warning:  include(../templates/footer.php): Failed to open stream: No such file or directory in E:\222\gamestock.shop\catalog.php on line 798
+[04-Feb-2026 20:38:46 UTC] PHP Warning:  include(): Failed opening '../templates/footer.php' for inclusion (include_path='.;C:\php\pear') in E:\222\gamestock.shop\catalog.php on line 798

@@ -14,7 +14,7 @@ $amount = $_GET['amount'] ?? 0;
 $needed = $_GET['needed'] ?? 0;
 
 $page_title = 'Пополнение баланса - ' . SITE_NAME;
-require_once '../templates/header.php';
+require_once '../templates/header-main.php';
 ?>
 
 <div class="container py-5">

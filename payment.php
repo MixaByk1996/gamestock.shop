@@ -1028,7 +1028,7 @@ require_once 'templates/header-main.php';
         </div>
     </div>
 </div>
-
+<?php require_once 'templates/footer.php'; ?>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const cardSelect = document.getElementById('cardSelect');
@@ -1298,7 +1298,7 @@ html, body {
 </style>
 
 <?php 
-require_once 'templates/footer.php';
+
 
 // Очищаем буфер вывода на случай случайных сообщений
 $output = ob_get_contents();
